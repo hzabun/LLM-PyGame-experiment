@@ -1,4 +1,6 @@
 import pygame
+
+
 class Menu:
     def __init__(self, screen):
         self.screen = screen
@@ -32,11 +34,11 @@ class Menu:
                         self.selected_option = min(self.selected_option + 1, len(self.options) - 1)
                     elif event.key == pygame.K_RETURN:
                         if self.selected_option == 0:
-                            print('Start Game')
+                            return self.screen  # 'Start Game' option selected
                         elif self.selected_option == 1:
                             print('Options')
                         elif self.selected_option == 2:
-                            running = False
+                            pygame.quit()
 
             # Fill the screen with black to clear away the previous frame
             self.screen.fill((0, 0, 0))
