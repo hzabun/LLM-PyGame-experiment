@@ -169,3 +169,41 @@ Once all the platforms are generated, the level file returns the whole screen ba
 
 ### Promptv1
 levelPromptv1 = "Write PyGame code to create a simple level file called 'level.py' in an object oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the level file. Do not implement any other file. The level file gets instantiated by another file and receives an already filled screen object. Prepare the already filled screen object so that it's empty and can be drawn upon. The level file generates 4 platforms: - 1 medium length on the left middle side of the screen- 1 medium length on the right middle side of the screen - 1 large on the middle bottom side of the screen - 1 small on the middle upper side of the screen. Make the 4 platforms properly fill a screen of size 1200x800. Once all the platforms are generated, the level file returns the whole screen back. \n"
+
+# Character prompt
+
+### Textv1
+characterPromptv1Text = """Write PyGame code to create a simple character file called 'character.py' in an object-oriented way for a 2D game.
+The game is already initialized by another file. Implement ONLY the character file. Do not implement any other file.
+The character has hit points which indicate its health. The character starts with 5 hit points.
+The character also has a list of equipments, namely:
+- A bow and arrow
+- A shield
+- A health potion
+The image for the character can be found in the following locaiton: 'assets/images/character.bmp'. \n"""
+
+### Promptv1
+characterPromptv1 = "Write PyGame code to create a simple character file called 'character.py' in an object-oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the character file. Do not implement any other file. The character has hit points which indicate its health. The character starts with 5 hit points. The character also has a list of equipments, namely: - A bow and arrow - A shield - A health potion. The image for the character can be found in the following locaiton: 'assets/images/character.bmp'. \n"
+
+
+### Textv2
+characterPromptv2Text = """Write PyGame code to create a simple character file called 'character.py' in an object-oriented way for a 2D game.
+The game is already initialized by another file. Implement ONLY the character file. Do not implement any other file.
+The character file gets instantiated by another file. Initialize the character file with only itself, nothing else.
+The character has hit points which indicate its health. The character starts with 5 hit points.
+The character also has a list of equipments, namely:
+- A bow and arrow
+- A shield
+- A health potion
+The image for the character can be found in the following locaiton: 'assets/images/character.bmp'. \n"""
+
+### Promptv2
+characterPromptv2 = "Write PyGame code to create a simple character file called 'character.py' in an object-oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the character file. Do not implement any other file. The character file gets instantiated by another file. Initialize the character file with only itself, nothing else. The character has hit points which indicate its health. The character starts with 5 hit points. The character also has a list of equipments, namely: - A bow and arrow - A shield - A health potion. The image for the character can be found in the following locaiton: 'assets/images/character.bmp'. \n"
+
+
+# Render prompt
+
+### Textv1
+
+
+### Promptv1
