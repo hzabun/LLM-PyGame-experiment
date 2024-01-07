@@ -31,6 +31,30 @@ If in the state 'level_generation': instantiate the class 'Level' with the 'menu
 ### Promptv1
 mainFilePromptText = "Write Pygame code in an object oriented way to create a simple main file for a game. The main file will be used as controller for the whole game. The main file has the following states: 'initialized', 'main_menu', 'level_generation' and 'quitting'. The main file imports the following:- from file 'menu' the class 'Menu'- from file 'level' the class 'Level'. The main file will loop forever and decide which module of the game gets control depending on the state. The main file starts in the state 'initialized', then goes to 'main_menu' and then to 'level_generation'. The main file creates a basic PyGame screen with resolutions 1200x800. If in the state 'main_menu': instantiate the class 'Menu' with the screen object, run the method 'run()' in it and store what it returns in the variable 'menu_screen'. If in the state 'level_generation': instantiate the class 'Level' with the 'menu_screen' object, run the method 'draw_platforms()' in it and store what it returns in the variable 'level_screen'. /n"
 
+## Update with modified level.py, character.py and render.py
+
+### Textv1
+mainFilePromptTextv1 = """Write Pygame code in an object oriented way to create a simple main file for a game.
+The main file will be used as controller for the whole game.
+The main file has the following states: 'initialized', 'main_menu', 'level_generation', 'rendering' and 'quitting'.
+The main file imports the following:
+- from file 'menu' the class 'Menu'
+- from file 'level' the class 'Level'
+- from file 'character' the class 'Character'
+- from file 'render' the class 'Render'.
+The main file will loop forever and decide which module of the game gets control depending on the state.
+The main file starts in the state 'initialized', then goes to 'main_menu', then goes to 'level_generation' and then to 'rendering'.
+The main file creates a basic PyGame screen with resolutions 1200x800.
+If in the state 'main_menu': instantiate the class 'Menu' with the screen object, run the method 'run()' in it and store what it returns in the variable 'menu_screen'.
+If in the state 'level_generation': instantiate the class 'Level' with the 'menu_screen' object
+If in the state 'rendering': first inantiate the class 'Character'. And then instantiate the class 'Render' with the following objects:
+- level.screen
+- level.platforms
+- character
+/n"""
+
+### Promptv1
+mainFilePromptv1 = "Write Pygame code in an object oriented way to create a simple main file for a game. The main file will be used as controller for the whole game. The main file has the following states: 'initialized', 'main_menu', 'level_generation', 'rendering' and 'quitting'. The main file imports the following: - from file 'menu' the class 'Menu' - from file 'level' the class 'Level' - from file 'character' the class 'Character' - from file 'render' the class 'Render'. The main file will loop forever and decide which module of the game gets control depending on the state. The main file starts in the state 'initialized', then goes to 'main_menu', then goes to 'level_generation' and then to 'rendering'. The main file creates a basic PyGame screen with resolutions 1200x800. If in the state 'main_menu': instantiate the class 'Menu' with the screen object, run the method 'run()' in it and store what it returns in the variable 'menu_screen'. If in the state 'level_generation': instantiate the class 'Level' with the 'menu_screen' object. If in the state 'rendering': first inantiate the class 'Character'. And then instantiate the class 'Render' with the following objects: - level.screen - level.platforms - character /n"
 
 # Menu prompt
 
@@ -170,6 +194,27 @@ Once all the platforms are generated, the level file returns the whole screen ba
 ### Promptv1
 levelPromptv1 = "Write PyGame code to create a simple level file called 'level.py' in an object oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the level file. Do not implement any other file. The level file gets instantiated by another file and receives an already filled screen object. Prepare the already filled screen object so that it's empty and can be drawn upon. The level file generates 4 platforms: - 1 medium length on the left middle side of the screen- 1 medium length on the right middle side of the screen - 1 large on the middle bottom side of the screen - 1 small on the middle upper side of the screen. Make the 4 platforms properly fill a screen of size 1200x800. Once all the platforms are generated, the level file returns the whole screen back. \n"
 
+
+## Update with returning platforms as well
+
+### Textv1
+levelPromptv1Text = """Write PyGame code to create a simple level file called 'level.py' in an object oriented way for a 2D game.  
+The game is already initialized by another class. Implement ONLY the level class. Do not implement any other class.  
+The level class gets instantiated by another class and receives an already filled screen object.
+Prepare the already filled screen object so that it's empty and can be drawn upon.
+The level file generates 4 platforms:
+- 1 medium length on the left middle side of the screen
+- 1 medium length on the right middle side of the screen
+- 1 large on the middle bottom side of the screen
+- 1 small on the middle upper side of the screen
+Make the 4 platforms properly fill a screen of size 1200x800.
+Once all the platforms are generated, the level class returns the whole screen back as 'self.level.screen'
+The level file also adds all the platforms to 'self.level.platforms'. \n"""
+
+### Promptv1
+levelPromptv1Text = "Write PyGame code to create a simple level file called 'level.py' in an object oriented way for a 2D game. The game is already initialized by another class. Implement ONLY the level class. Do not implement any other class. The level class gets instantiated by another class and receives an already filled screen object. Prepare the already filled screen object so that it's empty and can be drawn upon. The level file generates 4 platforms: - 1 medium length on the left middle side of the screen - 1 medium length on the right middle side of the screen - 1 large on the middle bottom side of the screen - 1 small on the middle upper side of the screen. Make the 4 platforms properly fill a screen of size 1200x800. Once all the platforms are generated, the level class returns the whole screen back as 'self.level.screen' The level file also adds all the platforms to 'self.level.platforms'. \n"
+
+
 # Character prompt
 
 ### Textv1
@@ -204,6 +249,47 @@ characterPromptv2 = "Write PyGame code to create a simple character file called 
 # Render prompt
 
 ### Textv1
-
+renderPromptv1Text = """Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game.
+The game is already initialized by another file. Implement ONLY the render file. Do not implement any other file.
+The render file gets instantiated by another file and receives a screen object with a level in it and a character sprite object.  
+The render file's task is to render the characters movement on the level screen.
+The character can stand on the platforms of the level.
+Include ability to move the character left and right and make it jump by recording keyboard strokes. \n"""
 
 ### Promptv1
+renderPromptv1Text = """Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the render file. Do not implement any other file. The render file gets instantiated by another file and receives a screen object with a level in it and a character sprite object. The render file's task is to render the characters movement on the level screen. The character can stand on the platforms of the level. Include ability to move the character left and right and make it jump by recording keyboard strokes. \n"""
+
+
+### Textv2
+renderPromptv2Text = """Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game.
+The game is already initialized by another file. Implement ONLY the render class. Do not implement any other class.
+The render class gets instantiated by another class and receives an already filled screen object with a level in it and a character sprite object.  
+The render classes task is to implement the characters movement on the level screen.
+The character can stand on the platforms of the level.
+Include ability to move the character left and right and the ability to jump by recording keyboard strokes. \n"""
+
+### Promptv2
+renderPromptv2Text = "Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the render class. Do not implement any other class. The render class gets instantiated by another class and receives an already filled screen object with a level in it and a character sprite object. The render classes task is to implement the characters movement on the level screen. The character can stand on the platforms of the level. Include ability to move the character left and right and the ability to jump by recording keyboard strokes. \n"
+
+### Textv3
+renderPromptv3Text = """Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game.
+The game is already initialized by another file. Implement ONLY the render class. Do not implement any other class.
+The render class gets instantiated by another class and receives an already filled screen object with a level in it and a character sprite object.  
+The render classes task is to implement the characters movement on the level screen.
+Add ability to detect collision with the platforms on the level, so that the character can stand on the platforms in the level.
+Include ability to move the character left and right and the ability to jump by recording keyboard strokes. \n"""
+
+### Promptv3
+renderPromptv3Text = "Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the render class. Do not implement any other class. The render class gets instantiated by another class and receives an already filled screen object with a level in it and a character sprite object. The render classes task is to implement the characters movement on the level screen. Add ability to detect collision with the platforms on the level, so that the character can stand on the platforms in the level. Include ability to move the character left and right and the ability to jump by recording keyboard strokes. \n"
+
+### Textv4
+renderPromptv4Text = """Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game.
+The game is already initialized by another file. Implement ONLY the render class. Do not implement any other class.
+The render class gets instantiated by another class and receives an already filled screen object with a level in it and a character sprite object.  
+The render classes task is to implement the characters movement on the level screen.
+The render class has a method called 'run()' which loops forever. The 'run()' method detects collision of the character with the platforms on the level, so that the character can stand on the platforms in the level.
+The 'run()' method also records keyboard strokes from the user to move the character left and right and make the character jump. \n"""
+
+### Promptv4
+renderPromptv4Text = "Write PyGame code to create a simple render file called 'remder.py' in an object-oriented way for a 2D game. The game is already initialized by another file. Implement ONLY the render class. Do not implement any other class. The render class gets instantiated by another class and receives an already filled screen object with a level in it and a character sprite object. The render classes task is to implement the characters movement on the level screen. The render class has a method called 'run()' which loops forever. The 'run()' method detects collision of the character with the platforms on the level, so that the character can stand on the platforms in the level. The 'run()' method also records keyboard strokes from the user to move the character left and right and make the character jump. \n"
+
