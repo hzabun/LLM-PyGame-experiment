@@ -1,60 +1,70 @@
 import pygame
 from pygame.locals import *
+import sys
 
 class Render:
-    def __init__(self, screen, platforms, character):
-        self.screen = screen
-        self.character = character
-        self.platforms = platforms
-        self.running = True
+    def __init__(self, screen, platforms, character_sprite):
+        self.old_screen = screen.copy()
+        self.new_screen = screen
+        self.character_sprite = character_sprite
+        self.clock = pygame.time.Clock()
 
-        # Character position and movement
-        self.character_x = 100
-        self.character_y = 250
-        self.character_jump = False
-        self.character_left = False
-        self.character_right = False
+        # Character attributes
+        self.character_rect = character_sprite.rect
+        self.character_speed = 5
+        self.jump_height = 10
+        self.gravity = 1
+        self.is_jumping = False
+        self.y_velocity = 0
+
+        self.platforms = platforms
+
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+    def move_character(self, keys):
+        if keys[pygame.K_LEFT] and self.character_rect.left > 0:
+            self.character_rect.x -= self.character_speed
+        if keys[pygame.K_RIGHT] and self.character_rect.right < self.new_screen.get_width():
+            self.character_rect.x += self.character_speed
+
+    def jump(self, keys):
+        if keys[pygame.K_SPACE] and not self.is_jumping:
+            self.is_jumping = True
+            self.y_velocity = -self.jump_height
+
+    def apply_gravity(self):
+        if self.is_jumping:
+            self.y_velocity += self.gravity
+            self.character_rect.y += self.y_velocity
+            self.is_jumping = False
+        else:
+            # Check for collision with platforms
+            for platform in self.platforms:
+                if self.character_rect.colliderect(platform) and self.y_velocity <= 0:
+                    self.character_rect.y = platform.top - self.character_rect.height
+                    self.y_velocity = 0
+                    break
+                else:
+                    self.character_rect.y += self.gravity
 
     def run(self):
-        while self.running:
-            # Detect events
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    self.running = False
-                elif event.type == KEYDOWN and event.key == K_ESCAPE:
-                    self.running = False
+        while True:
+            self.handle_events()
 
-                # Movement control
-                if event.type == KEYDOWN:
-                    if event.key == K_LEFT:
-                        self.character_left = True
-                    elif event.key == K_RIGHT:
-                        self.character_right = True
-                    elif event.key == K_UP:
-                        self.character_jump = True
-                if event.type == KEYUP:
-                    if event.key == K_LEFT or event.key == K_RIGHT:
-                        self.character_left = False
-                        self.character_right = False
+            keys = pygame.key.get_pressed()
+            self.move_character(keys)
+            self.jump(keys)
+            self.apply_gravity()
 
-            # Update character position
-            if self.character_jump:
-                self.character_y -= 10
-                self.character_jump = False
-            else:
-                if self.character_left:
-                    self.character_x -= 5
-                elif self.character_right:
-                    self.character_x += 5
+            self.new_screen.blit(self.old_screen, (0, 0))
+            self.new_screen.blit(self.character_sprite.image, (self.character_rect.x, self.character_rect.y))
 
-            # Drawing
-            self.screen.blit(self.character.image, (self.character_x, self.character_y))
             pygame.display.flip()
 
-        pygame.quit()
+            self.clock.tick(60)
 
-    def checkCollision(self):
-        for platform in self.platforms:
-            if self.character.colliderect(platform):
-                self.character.y = platform.y - self.character.height
 
