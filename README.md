@@ -76,3 +76,8 @@ output['choices'][0]['finish_reason']
 
 output['usage']
 
+
+## Attribution
+
+Background image in menu:
+<a href="https://www.freepik.com/free-vector/medieval-castle-tavern-room-with-stone-walls_32665649.htm#query=fantasy%20background%20tavern&position=2&from_view=search&track=ais&uuid=58602a07-ec55-4f8d-9604-611dd27e6f6b">Image by upklyak</a> on Freepik
