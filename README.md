@@ -1,8 +1,52 @@
-# LLM_PyGame
+# LLM PyGame experiment
+
+<!-- TOC -->
+* [Project description](#project-description)
+  * [Initial goal](#initial-goal)
+  * [Tools used](#tools-used)
+  * [End result](#end-result)
+  * [Next steps](#next-steps)
+* [Google Colab Llama.cpp code](#google-colab-llamacpp-code)
+  * [Context window size 512 (default)](#context-window-size-512-default)
+  * [Context window size 2048](#context-window-size-2048)
+  * [Context window size 4096](#context-window-size-4096)
+<!-- TOC -->
+
+## Project description
+
+### Initial goal
+Test the ability of an LLM to create custom-tailored games for everyone's specific tastes.
+
+Game development requires lots of resources, including time, money and knowledge. Not everyone has the resources to create a whole game from scratch. However, LLMs do have the coding knowledge and don't cost much to run.  
+
+LLMs are currently still quite in active development though, which is why this experiment is conducted to measure how good they are as of now for this use case.
+
+### Tools used
+- **Llama-cpp-python**
+  - Inference for llama models
+  - Able to distribute weights between GPU and system RAM
+- **Phind-CodeLlama-34B-v2**
+  - LLM fine-tuned specifically for coding
+  - One of the top scorers in Hugging Face code model leaderboard
+- **PyGame**
+  - Python game development library
+  - Chose PyGame as it's purely text based and has no UI
+  - Initial assumption: pure text based should make the coding  easier 
+
+### End result
+Turns out that my initial assumption was completely wrong.
+
+The lack of a UI in PyGame means that every little connection between modules needs to be programmed. On top of that, LLMs have a limited context window size, so it cannot write a whole file containing every single logic in the game. To circumvent that, I tried to keep modules as isolated as possible to make it easier for the LLM to understand the general project folder structure. But that meant that I have to tell the LLM every time exactly which modules it should consider.
+
+This requires lots of knowledge about programming, game development and tons of thinking, which beats the point of this experiment.  
+
+
+### Next steps
+Currently experimenting with using LLMs with the Unity game engine to see if a UI can help solve the module communication issue.
 
 ## Google Colab Llama.cpp code
 
-### Context window size 512
+### Context window size 512 (default)
 
 
 !CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python
